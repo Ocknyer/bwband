@@ -3,7 +3,14 @@
 
 import './globals.css';
 import NavBar from '@/components/NavBar';
+import TopNav from '@/components/TopNav';
+import { Metadata } from 'next';
 import localFont from 'next/font/local';
+
+const metadata: Metadata = {
+  title: '흑백밴드전 | 밴드 계급 전쟁',
+  description: '흑백밴드전 공연 예매 홈페이지',
+};
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',
@@ -16,22 +23,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='ko' className={`${pretendard.variable}`}>
       <head>
-        <title>PSAT 2기 정기공연</title>
-        <meta property='og:description' content='PSAT 2기 홍보/예매 홈페이지' />
+        <title>흑백밴드전 | 밴드 계급 전쟁</title>
+        <meta property='og:description' content='흑백밴드전 공연 예매 홈페이지' />
         <script
           defer
           type='text/javascript'
           src='https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=aejuu1jw3l'
         />
       </head>
-      <body className={pretendard.className} style={{ position: 'relative' }}>
+      <body className={`${pretendard.variable} relative bg-primary text-white pt-24`}>
+        <TopNav />
         {children}
-        {/* <div className='bg-container'>
-          <p className='w-full animate-flowText'>
-            CHO MIN SEO, YEO JUN SEO, SHIN MIN SEO, YOO JANE, SIN SEUNG HAN, CHOI YEONG SEO
-          </p>
-        </div> */}
-        <NavBar />
       </body>
     </html>
   );

@@ -57,7 +57,7 @@ const Admin = () => {
   };
 
   const getReserveList = async () => {
-    const q = query(collection(fireStore, 'psatbooker'), orderBy('createdAt', 'desc'));
+    const q = query(collection(fireStore, 'bwbandbooker'), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
 
     const reserveCount = querySnapshot.docs.reduce((acc, cur) => (acc += +cur.data().count), 0);
@@ -76,7 +76,7 @@ const Admin = () => {
   };
 
   const updateCheckedState = async (id: number) => {
-    const docRef = doc(fireStore, 'psatbooker', String(id));
+    const docRef = doc(fireStore, 'bwbandbooker', String(id));
 
     let response;
     try {
@@ -143,10 +143,10 @@ const Admin = () => {
         </div>
         <div className='flex gap-4'>
           <p className='text-xl font-bold'>
-            폼 작성 수: <span className='text-orange-400'>{dataList.length}</span>
+            폼 작성 수: <span className='text-gray-400'>{dataList.length}</span>
           </p>
           <p className='text-xl font-bold'>
-            판매: <span className='text-orange-400'>{dataLength}</span>/110
+            판매: <span className='text-gray-400'>{dataLength}</span>/110
           </p>
         </div>
       </div>

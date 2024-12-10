@@ -61,7 +61,7 @@ const SetList = () => {
             <section className='mt-8 text-center text-primary'>
               <div className='flex items-center justify-center gap-3 mb-6'>
                 <Image src={song.icon} alt='아이콘' width={idx === 0 ? 35 : 30} height={idx === 0 ? 35 : 30} />
-                <h1 className='text-4xl font-bold text-orange-400'>{song.teamName}</h1>
+                <h1 className='text-4xl font-bold text-gray-400'>{song.teamName}</h1>
               </div>
               {/* </Fade> */}
 

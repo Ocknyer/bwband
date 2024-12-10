@@ -91,7 +91,7 @@ const Reservation = () => {
 
   // 예약자 명단 가져오기
   const getReserveList = async () => {
-    const q = query(collection(fireStore, 'psatbooker'), orderBy('createdAt'));
+    const q = query(collection(fireStore, 'bwbandbooker'), orderBy('createdAt'));
     const querySnapshot = await getDocs(q);
 
     const data = querySnapshot.docs.map((doc) => {
@@ -150,14 +150,14 @@ const Reservation = () => {
 
     if (checkIsBooked(inputs)) {
       alert(
-        '입력하신 휴대전화번호로 기존 예매 정보가 존재합니다.\n\n추가 예매를 원하시면 010-6491-2248(조민서)으로 문의 주시기 바랍니다.'
+        '입력하신 휴대전화번호로 기존 예매 정보가 존재합니다.\n\n추가 예매를 원하시면 010-4138-8402(고유석)으로 문의 주시기 바랍니다.'
       );
       setInputs({ ...inputs, phone_number: '' });
       return;
     }
 
     if (inputs.count && inputs.name && inputs.phone_number) {
-      await setDoc(doc(fireStore, 'psatbooker', id as string), { ...inputs, createdAt: time, checked: false })
+      await setDoc(doc(fireStore, 'bwbandbooker', id as string), { ...inputs, createdAt: time, checked: false })
         .then(() => {
           sendEmail();
           sessionStorage.setItem('isBooked', 'true');
