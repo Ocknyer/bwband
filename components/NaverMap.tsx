@@ -7,7 +7,7 @@ const NaverMap = () => {
   useEffect(() => {
     if (!mapElement.current || !naver) return;
 
-    const location = new naver.maps.LatLng(37.5548537, 126.9304176);
+    const location = new naver.maps.LatLng(37.5556459, 126.920293);
 
     const map = new naver.maps.Map(mapElement.current, {
       center: location,
@@ -20,7 +20,7 @@ const NaverMap = () => {
     });
 
     const marker = new naver.maps.Marker({
-      position: new naver.maps.LatLng(37.5548537, 126.9304176),
+      position: new naver.maps.LatLng(37.5556459, 126.920293),
       map: map,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
