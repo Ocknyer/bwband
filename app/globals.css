@@ -168,6 +168,11 @@ h3 {
   @apply bg-primary text-white;
 } */
 
+.title-font {
+  font-family: 'SD Gyeokdong Mj2';
+  font-weight: 400;
+}
+
 .main-container {
   max-width: 1024px;
   margin: 0 auto;
