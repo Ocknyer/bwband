@@ -153,12 +153,16 @@ h3 {
   font-weight: 700;
 }
 
-/* @font-face {
-  font-family: 'SD Gyeokdong Mj2';
-  src: url('/fonts/SDGyeokdongMj2.ttf') format('truetype');
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
-} */
+}
+
+body {
+  font-family: 'Pretendard-Regular';
+}
 
 .title-font {
   font-family: 'SD Gyeokdong Mj2';
@@ -166,7 +170,7 @@ h3 {
 }
 
 .main-container {
-  max-width: 1024px;
+  max-width: 720px;
   margin: 0 auto;
 }
 

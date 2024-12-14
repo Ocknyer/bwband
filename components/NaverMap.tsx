@@ -27,7 +27,7 @@ const NaverMap = () => {
   }, []);
 
   // style={{ width: '300px', height: '200px' }}
-  return <div className='xs:w-60 xs:h-40 w-72 h-52 rounded-lg opacity-90' ref={mapElement} id='map'></div>;
+  return <div className='w-full h-40 sm:w-full sm:h-64 opacity-90' ref={mapElement} id='map'></div>;
 };
 
 export default NaverMap;

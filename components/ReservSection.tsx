@@ -2,14 +2,12 @@
 'use client';
 
 import CompleteSection from '@/components/CompleteSection';
-import fireStore from '../../firebase/firestore';
+import fireStore from '../firebase/firestore';
 import { getDocs, addDoc, collection, query, orderBy, doc, setDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import emailjs from '@emailjs/browser';
 import { TICKETS } from '@/constant';
-import ReservationSection from '@/components/ReservationSection';
-import { useRouter } from 'next/navigation';
 
 export type Input = {
   name: string;
@@ -22,10 +20,8 @@ const styles = {
   input: 'p-2 border-solid border mt-2 text-black text-base',
 };
 
-const Reservation = () => {
+const ReservSection = () => {
   const formRef = useRef<any>();
-  const router = useRouter();
-
   const [time, setTime] = useState(new Date());
   const [dataList, setDataList] = useState<any>([]);
   const [reserveLength, setReserveLength] = useState<number>();
@@ -164,7 +160,6 @@ const Reservation = () => {
           sessionStorage.setItem('isBooked', 'true');
         })
         .then(() => {
-          router.push('/complete');
           sessionStorage.setItem('inputs', JSON.stringify(inputs));
           setInputs({
             name: '',
@@ -178,7 +173,7 @@ const Reservation = () => {
   };
 
   return (
-    <main className='flex flex-col items-center justify-center w-full max-w-96 min-h-dvh pt-32 px-6 pb-16'>
+    <section className='flex flex-col items-center justify-center w-full max-w-96'>
       {!dataList ? (
         <svg className='animate-spin h-10 w-10 mr-3' fill='#00b7ff' viewBox='0 0 48 48'>
           <g id='_레이어_1-2' data-name='레이어 1'>
@@ -188,8 +183,8 @@ const Reservation = () => {
             />
           </g>
         </svg>
-      ) : (
-        <section>
+      ) : (reserveLength as number) <= TICKETS ? (
+        <>
           <form ref={formRef} onSubmit={sendEmail} className='hidden'>
             <input type='text' name='name' value={name} onChange={handleData} required />
             <input name='phone_number' value={phone_number} onChange={handleData} required />
@@ -268,12 +263,13 @@ const Reservation = () => {
                 제출하기
               </button>
             </form>
-            <ReservationSection />
           </Fade>
-        </section>
-      )}
-    </main>
+        </>
+      ) : isBooked ? (
+        <CompleteSection />
+      ) : null}
+    </section>
   );
 };
 
-export default Reservation;
+export default ReservSection;
