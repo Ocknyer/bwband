@@ -153,19 +153,11 @@ h3 {
   font-weight: 700;
 }
 
-/* html {
-  font-size: 16px;
-  -webkit-text-size-adjust: none;
-
-  @media screen and (min-device-width: 320px) {
-    html {
-      font-size: 62.5%;
-    }
-  }
-} */
-
-/* body {
-  @apply bg-primary text-white;
+/* @font-face {
+  font-family: 'SD Gyeokdong Mj2';
+  src: url('/fonts/SDGyeokdongMj2.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
 } */
 
 .title-font {
