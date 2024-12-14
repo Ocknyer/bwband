@@ -2,7 +2,7 @@
 'use client';
 
 import CompleteSection from '@/components/CompleteSection';
-import fireStore from '../../firebase/firestore';
+import fireStore from '../../../firebase/firestore';
 import { getDocs, addDoc, collection, query, orderBy, doc, setDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
@@ -178,7 +178,7 @@ const Reservation = () => {
   };
 
   return (
-    <main className='flex flex-col items-center justify-center w-full max-w-96 min-h-dvh pt-32 px-6 pb-16'>
+    <main className='main-container flex flex-col items-center justify-center w-full min-h-dvh pt-32 px-6 pb-16'>
       {!dataList ? (
         <svg className='animate-spin h-10 w-10 mr-3' fill='#00b7ff' viewBox='0 0 48 48'>
           <g id='_레이어_1-2' data-name='레이어 1'>
@@ -189,15 +189,15 @@ const Reservation = () => {
           </g>
         </svg>
       ) : (
-        <section>
+        <section className='flex flex-col items-center justify-center w-full'>
           <form ref={formRef} onSubmit={sendEmail} className='hidden'>
             <input type='text' name='name' value={name} onChange={handleData} required />
             <input name='phone_number' value={phone_number} onChange={handleData} required />
             <input name='count' value={count} onChange={handleData} required />
           </form>
-          <Fade direction='up' triggerOnce className='w-full'>
-            <h1 className='mb-4 text-lg font-bold'>잔여 {TICKETS - reserveLength!}석</h1>
+          <Fade direction='up' triggerOnce className='w-full max-w-96 mx-auto'>
             <form className='flex flex-col text-center items-center gap-4 mb-16 rounded-2xl p-8 w-full backdrop-blur-sm shadow-lg bg-black/70'>
+              <h1 className='mb-4 font-bold text-center'>잔여 {TICKETS - reserveLength!}석</h1>
               <div className={styles.inputBox}>
                 <label htmlFor='name' className='font-bold text-sm'>
                   성함
@@ -268,6 +268,8 @@ const Reservation = () => {
                 제출하기
               </button>
             </form>
+          </Fade>
+          <Fade direction='up' triggerOnce className='w-full'>
             <ReservationSection />
           </Fade>
         </section>

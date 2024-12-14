@@ -1,15 +1,11 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @next/next/no-before-interactive-script-outside-document */
-
-import './globals.css';
-import NavBar from '@/components/NavBar';
+import '../globals.css';
 import TopNav from '@/components/TopNav';
 import { Metadata } from 'next';
-import localFont from 'next/font/local';
 import Image from 'next/image';
+// import bgImage from '@/public/image/bg-image.webp';
 import bgImage from '@/public/image/bg-image.png';
 
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: '흑백밴드전 | 밴드 계급 전쟁',
   description: '흑백밴드전 공연 예매 홈페이지',
   icons: {
