@@ -1,11 +1,9 @@
 import '../globals.css';
 import { Metadata } from 'next';
-import Image from 'next/image';
-import bgImage from '@/public/image/bg-image.png';
 
 export const metadata: Metadata = {
-  title: '흑백밴드전 | 밴드 계급 전쟁',
-  description: '흑백밴드전 공연 예매 홈페이지',
+  title: '관리페이지',
+  description: '흑백밴드전 관리페이지',
   icons: {
     icon: '/icon.png',
     apple: {
@@ -19,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='ko'>
       <head>
-        <title>흑백밴드전 | 밴드 계급 전쟁</title>
+        <title>관리페이지</title>
         <meta property='og:description' content='흑백밴드전 관리페이지' />
         <script
           defer
