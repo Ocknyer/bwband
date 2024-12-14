@@ -12,6 +12,13 @@ import bgImage from '@/public/image/bg-image.png';
 const metadata: Metadata = {
   title: '흑백밴드전 | 밴드 계급 전쟁',
   description: '흑백밴드전 공연 예매 홈페이지',
+  icons: {
+    icon: '/icon.png',
+    apple: {
+      url: '/apple-icon.png',
+      sizes: '180x180',
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
