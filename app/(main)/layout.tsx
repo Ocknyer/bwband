@@ -8,6 +8,19 @@ import bgImage from '@/public/image/bg-image.png';
 export const metadata: Metadata = {
   title: '흑백밴드전 | 밴드 계급 전쟁',
   description: '흑백밴드전 공연 예매 홈페이지',
+  openGraph: {
+    title: '흑백밴드전 | 밴드 계급 전쟁',
+    description: '흑백밴드전 공연 예매 홈페이지',
+    images: [
+      {
+        url: '/opengraph/opengraph-image.png',
+        alt: '빙빙 오픈그래프 이미지',
+      },
+    ],
+    siteName: '흑백밴드전 | 밴드 계급 전쟁',
+    locale: 'ko_KR',
+    type: 'website',
+  },
   icons: {
     icon: '/icon.png',
     apple: {
