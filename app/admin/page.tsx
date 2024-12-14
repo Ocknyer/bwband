@@ -8,6 +8,8 @@ import firebasedb from '@/firebase/firebasedb';
 import { formatTimeStamp } from '@/utils/utils';
 import useCopyClipboard from '@/hooks/useCopyClipboard';
 import { useVh } from '@/hooks/useVh';
+import { TICKETS } from '@/constant';
+import Spinner from '@/components/Common/Spinner';
 
 const Admin = () => {
   const { copyToClipboard } = useCopyClipboard();
@@ -19,12 +21,14 @@ const Admin = () => {
   const [searchData, setSearchData] = useState<any[]>([]);
   const [dataLength, setDataLength] = useState<string>();
   const [filterText, setFilterText] = useState<string>('');
-  const [email, setEmail] = useState('admin@email.com');
+  const [email, setEmail] = useState('yusuko20415@gmail.com');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [authChecking, setAuthChecking] = useState(true);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log('로그인 상태');
         setIsLogin(true);
@@ -32,17 +36,23 @@ const Admin = () => {
         console.log('로그아웃 상태');
         setIsLogin(false);
       }
+      setAuthChecking(false);
     });
+
+    return () => unsubscribe();
   }, [auth]);
 
   // 로그인
   const login = async (data: any) => {
     try {
+      setLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       console.log('success');
     } catch (error) {
       console.log(error);
       alert('비밀번호가 일치하지 않습니다.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -104,15 +114,23 @@ const Admin = () => {
     setDataList(filtered);
   }, [filterText]);
 
+  if (authChecking) {
+    return (
+      <div className='flex items-center justify-center min-h-screen'>
+        <Spinner color='#ffffff' width={40} height={40} />
+      </div>
+    );
+  }
+
   return !isLogin ? (
-    <main className='main-container' style={{ height: `${100 * vh}px` }}>
-      <div className='flex flex-col items-center justify-center gap-2 h-dvh'>
+    <main className='main-container p-6' style={{ height: `${100 * vh}px` }}>
+      <div className='flex flex-col items-center justify-center gap-2 h-dvh max-w-96 mx-auto'>
         <input
           type='text'
           placeholder='아이디'
           value={email}
           onInput={(e) => setEmail(e.currentTarget.value)}
-          className='h-12 p-2 border-solid border text-black text-base rounded-lg'
+          className='h-12 p-2 border-solid border text-black text-base rounded-lg w-full'
         />
         <input
           type='password'
@@ -120,10 +138,13 @@ const Admin = () => {
           name='password'
           value={password}
           onInput={(e) => setPassword(e.currentTarget.value)}
-          className='h-12 p-2 border-solid border text-black text-base rounded-lg'
+          className='h-12 p-2 border-solid border text-black text-base rounded-lg w-full'
         />
-        <button onClick={login} className='h-12 bg-primary text-white w-24 rounded-md'>
-          로그인
+        <button
+          onClick={login}
+          className='h-12 bg-primary text-white rounded-md w-full flex items-center justify-center'
+        >
+          {loading ? <Spinner /> : '로그인'}
         </button>
       </div>
     </main>
@@ -142,11 +163,11 @@ const Admin = () => {
           </button>
         </div>
         <div className='flex gap-4'>
-          <p className='text-xl font-bold'>
+          <p className='font-bold'>
             폼 작성 수: <span className='text-gray-400'>{dataList.length}</span>
           </p>
-          <p className='text-xl font-bold'>
-            판매: <span className='text-gray-400'>{dataLength}</span>/110
+          <p className='font-bold'>
+            판매: <span className='text-gray-400'>{dataLength}</span>/{TICKETS}
           </p>
         </div>
       </div>

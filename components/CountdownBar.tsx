@@ -23,7 +23,7 @@ const CountdownBar = ({ endTime }: IProps) => {
   }
 
   return (
-    <div className='fixed bottom-0 left-0 w-full flex justify-center z-20 bg-primary'>
+    <div className='fixed bottom-0 left-0 w-full flex justify-center z-20 bg-primary items-center'>
       <div className='max-w-[720px] w-full flex items-center justify-center gap-2 font-bold bg-primary p-3'>
         <div className='flex flex-col'>
           <div className='flex flex-col items-center justify-center'>

@@ -18,6 +18,9 @@ const config: Config = {
       colors: {
         primary: '#060507',
       },
+      transformOrigin: {
+        'origin-center': 'center',
+      },
     },
     screens: {
       // xs: { max: '300px' },
