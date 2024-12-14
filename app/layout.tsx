@@ -14,16 +14,9 @@ const metadata: Metadata = {
   description: '흑백밴드전 공연 예매 홈페이지',
 };
 
-const pretendard = localFont({
-  src: '../public/fonts/PretendardVariable.woff2',
-  display: 'swap',
-  weight: '45 920',
-  variable: '--font-pretendard',
-});
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='ko' className={`${pretendard.variable}`}>
+    <html lang='ko'>
       <head>
         <title>흑백밴드전 | 밴드 계급 전쟁</title>
         <meta property='og:description' content='흑백밴드전 공연 예매 홈페이지' />
@@ -38,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src='https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=aejuu1jw3l'
         />
       </head>
-      <body className={`${pretendard.variable} relative text-white`}>
+      <body className={`relative text-white`}>
         {/* <div className='fixed inset-0 w-full h-full -z-10 flex'>
           <div className='flex-1 inset-0 bg-gray-50'></div>
           <div className='flex-1 inset-0 bg-primary'></div>
