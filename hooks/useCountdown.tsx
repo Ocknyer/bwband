@@ -19,7 +19,7 @@ export default function useCountdown(targetTime: string) {
       const seconds = String(duration.seconds()).padStart(2, '0');
 
       if (Number(days) > 0) {
-        setRemaingTime(`${days}일  ${hours} : ${minutes} : ${seconds}`);
+        setRemaingTime(`D-${days} ${hours} : ${minutes} : ${seconds}`);
       } else {
         setRemaingTime(`${hours} : ${minutes} : ${seconds}`);
       }

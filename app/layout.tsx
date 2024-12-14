@@ -6,6 +6,8 @@ import NavBar from '@/components/NavBar';
 import TopNav from '@/components/TopNav';
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Image from 'next/image';
+import bgImage from '@/public/image/bg-image.png';
 
 const metadata: Metadata = {
   title: '흑백밴드전 | 밴드 계급 전쟁',
@@ -36,7 +38,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src='https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=aejuu1jw3l'
         />
       </head>
-      <body className={`${pretendard.variable} relative bg-primary text-white pt-24`}>
+      <body className={`${pretendard.variable} relative text-white`}>
+        {/* <div className='fixed inset-0 w-full h-full -z-10 flex'>
+          <div className='flex-1 inset-0 bg-gray-50'></div>
+          <div className='flex-1 inset-0 bg-primary'></div>
+        </div> */}
+        <div className='fixed inset-0 w-full h-full -z-10 scale-110'>
+          <Image src={bgImage} alt='배경이미지' fill className='object-cover' />
+        </div>
         <TopNav />
         {children}
       </body>

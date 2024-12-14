@@ -5,9 +5,11 @@ import CompleteSection from '@/components/CompleteSection';
 import fireStore from '../../firebase/firestore';
 import { getDocs, addDoc, collection, query, orderBy, doc, setDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
-import { useVh } from '@/hooks/useVh';
 import { Fade } from 'react-awesome-reveal';
 import emailjs from '@emailjs/browser';
+import { TICKETS } from '@/constant';
+import ReservationSection from '@/components/ReservationSection';
+import { useRouter } from 'next/navigation';
 
 export type Input = {
   name: string;
@@ -16,13 +18,14 @@ export type Input = {
 };
 
 const styles = {
-  inputBox: 'flex flex-col lg:w-96 md:w-80 w-full',
-  input: 'p-2 border-solid border mt-2 text-black text-base rounded-lg',
+  inputBox: 'flex flex-col w-full text-left',
+  input: 'p-2 border-solid border mt-2 text-black text-base',
 };
 
 const Reservation = () => {
-  const vh = useVh();
   const formRef = useRef<any>();
+  const router = useRouter();
+
   const [time, setTime] = useState(new Date());
   const [dataList, setDataList] = useState<any>([]);
   const [reserveLength, setReserveLength] = useState<number>();
@@ -37,8 +40,6 @@ const Reservation = () => {
     count: '',
     phone_number: '',
   });
-
-  const tickets = 110;
 
   const isFilled = inputs.name !== '' && inputs.count !== '' && inputs.phone_number.length >= 13 && isAgree;
 
@@ -61,7 +62,7 @@ const Reservation = () => {
 
     if (name === 'count') {
       const regex =
-        tickets - reserveLength! >= 3 ? /^[1-3]{0,1}$/ : tickets - reserveLength! === 2 ? /^[1-2]{0,1}$/ : /^[1]{0,1}$/;
+        TICKETS - reserveLength! >= 3 ? /^[1-3]{0,1}$/ : TICKETS - reserveLength! === 2 ? /^[1-2]{0,1}$/ : /^[1]{0,1}$/;
       if (regex.test(e.target.value)) {
         setInputs({ ...inputs, count: e.target.value });
       }
@@ -163,6 +164,7 @@ const Reservation = () => {
           sessionStorage.setItem('isBooked', 'true');
         })
         .then(() => {
+          router.push('/complete');
           sessionStorage.setItem('inputs', JSON.stringify(inputs));
           setInputs({
             name: '',
@@ -176,7 +178,7 @@ const Reservation = () => {
   };
 
   return (
-    <main className='flex flex-col items-center justify-center p-6' style={{ height: `${100 * vh}px` }}>
+    <main className='flex flex-col items-center justify-center w-full max-w-96 min-h-dvh pt-32 px-6 pb-16'>
       {!dataList ? (
         <svg className='animate-spin h-10 w-10 mr-3' fill='#00b7ff' viewBox='0 0 48 48'>
           <g id='_레이어_1-2' data-name='레이어 1'>
@@ -186,18 +188,18 @@ const Reservation = () => {
             />
           </g>
         </svg>
-      ) : reserveLength! >= tickets ? (
-        <section className='flex flex-col items-center justify-center p-0'>
+      ) : (
+        <section>
           <form ref={formRef} onSubmit={sendEmail} className='hidden'>
             <input type='text' name='name' value={name} onChange={handleData} required />
             <input name='phone_number' value={phone_number} onChange={handleData} required />
             <input name='count' value={count} onChange={handleData} required />
           </form>
-          <Fade direction='up' triggerOnce>
-            <h1 className='mb-4 text-lg font-bold'>잔여 {tickets - reserveLength!}석</h1>
-            <form className='flex flex-col text-center items-center lg:gap-8 md:gap-6 gap-4 mb-16 rounded-2xl p-8 lg:w-full md:w-96 xs:w-110 w-72 backdrop-blur-sm shadow-lg bg-primary/20'>
+          <Fade direction='up' triggerOnce className='w-full'>
+            <h1 className='mb-4 text-lg font-bold'>잔여 {TICKETS - reserveLength!}석</h1>
+            <form className='flex flex-col text-center items-center gap-4 mb-16 rounded-2xl p-8 w-full backdrop-blur-sm shadow-lg bg-black/70'>
               <div className={styles.inputBox}>
-                <label htmlFor='name' className='font-bold text-lg'>
+                <label htmlFor='name' className='font-bold text-sm'>
                   성함
                 </label>
                 <input
@@ -205,14 +207,14 @@ const Reservation = () => {
                   name='name'
                   value={name}
                   type='text'
-                  placeholder='ex) 김피샛'
+                  placeholder='ex) 김흑백'
                   onChange={handleData}
                   required
                   className={styles.input}
                 />
               </div>
               <div className={styles.inputBox}>
-                <label htmlFor='phone_number' className='font-bold text-lg'>
+                <label htmlFor='phone_number' className='font-bold text-sm'>
                   전화번호
                 </label>
                 <input
@@ -227,7 +229,7 @@ const Reservation = () => {
                 />
               </div>
               <div className={styles.inputBox}>
-                <label htmlFor='count' className='font-bold text-lg'>
+                <label htmlFor='count' className='font-bold text-sm'>
                   예매 장수
                 </label>
                 <input
@@ -237,7 +239,7 @@ const Reservation = () => {
                   max={3}
                   min={1}
                   type='text'
-                  placeholder={`ex) 1 / 최대 ${tickets - reserveLength! >= 3 ? 3 : tickets - reserveLength!}매`}
+                  placeholder={`ex) 1 / 최대 ${TICKETS - reserveLength! >= 3 ? 3 : TICKETS - reserveLength!}매`}
                   onChange={handleData}
                   required
                   className={styles.input}
@@ -260,26 +262,16 @@ const Reservation = () => {
                 type='submit'
                 onClick={onClickReserve}
                 className={
-                  'rounded-lg p-2 w-4/5 mt-2' +
-                  ' ' +
-                  [!isFilled ? 'bg-gray-300 text-gray-500' : 'bg-primary/40 text-white']
+                  'h-12 p-2 w-full mt-2' + ' ' + [!isFilled ? 'bg-gray-300 text-gray-500' : 'bg-primary text-white']
                 }
               >
                 제출하기
               </button>
             </form>
+            <ReservationSection />
           </Fade>
         </section>
-      ) : !isBooked && reserveLength! < tickets ? (
-        <p>공연이 종료 되었습니다.</p> // 위쪽 section이랑 바꾸기만 하면 됨
-      ) : isBooked ? (
-        <CompleteSection />
-      ) : // <div className='flex flex-col items-center gap-2'>
-      //   <p>예매가 종료되었습니다.</p>
-      //   <p>잔여석에 한해 현장구매 가능합니다.</p>
-      //   <p>문의 : 010-3364-0633 파수꾼 김대운</p>
-      // </div>
-      null}
+      )}
     </main>
   );
 };

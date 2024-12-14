@@ -1,20 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import NaverMap from '@/components/NaverMap';
 import useCopyClipboard from '@/hooks/useCopyClipboard';
-import { useRouter } from 'next/navigation';
+
 import { useEffect, useState } from 'react';
-import mainImg from '@/public/image/bg_swimming.jpg';
+import mainImg from '@/public/image/guitar.png';
 import Image from 'next/image';
-import { Fade } from 'react-awesome-reveal';
-import MapSection from '@/components/MapSection';
+
 import BasicInfoSection from '@/components/BasicInfoSection';
 import ReservationSection from '@/components/ReservationSection';
 import CountdownBar from '@/components/CountdownBar';
+import ReservSection from '@/components/ReservSection';
+import MapSection from '@/components/MapSection';
 
 export default function Home() {
-  const router = useRouter();
   const [mounted, setMounted] = useState<boolean>(false);
   const { copyToClipboard } = useCopyClipboard();
 
@@ -25,15 +24,14 @@ export default function Home() {
 
   return (
     mounted && (
-      <main className='w-screen h-full flex flex-col gap-10 items-center justify-center pb-24 pt-10 overflow-x-hidden'>
-        <section className='flex flex-col justify-center items-center gap-y-3 relative'>
-          <ReservationSection />
-        </section>
-
+      <main className='main-container flex flex-col gap-10 items-center justify-center px-6 pb-24 pt-32 overflow-x-hidden'>
+        <div className='flex justify-center w-[450px] sm:w-[640px] h-[450px] sm:h-[640px] relative'>
+          <Image src={mainImg} alt='기타이미지' fill priority className='object-contain' />
+        </div>
         <BasicInfoSection />
+        {/* <ReservSection /> */}
 
         <MapSection />
-
         <CountdownBar endTime={'2025-01-04'} />
       </main>
     )
