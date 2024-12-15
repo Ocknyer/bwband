@@ -28,9 +28,10 @@ const CompleteSection = () => {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center min-h-dvh'>
-      <div className='backdrop-blur-sm shadow-lg bg-black/70 p-6 rounded-2xl'>
-        <Fade direction='up'>
-          <h1 className='text-lg font-bold'>작성이 완료되었습니다.</h1>
+      <Fade direction='up'>
+        <div className='backdrop-blur-sm shadow-lg bg-black/70 p-6 rounded-2xl'>
+          <p className='text-2xl font-bold font-capsSmall'>Booking Completed</p>
+          {/* <h1 className='text-lg font-bold'>작성이 완료되었습니다.</h1> */}
           <p className='leading-7 mt-6'>
             아래 계좌번호로 <span className='inline underline font-bold'>{totalPrice}원</span>({inputs?.count}매)을
             입금해 주시면
@@ -47,7 +48,7 @@ const CompleteSection = () => {
             <br />
             <span className='inline underline font-bold'>똑같이</span> 입력해주시기 바랍니다.
           </p>
-          <p className='leading-7 mt-6 font-bold bg-primary/40 px-4 py-1 rounded-lg text-white'>
+          <p className='leading-7 mt-6 font-bold bg-white/100 px-4 py-1 rounded-lg text-primary'>
             국민{' '}
             <button
               onClick={() => copyToClipboard('국민 94160201320107', '계좌번호가 복사되었습니다.')}
@@ -60,8 +61,8 @@ const CompleteSection = () => {
             <br />
             문의 | 010-4138-8402
           </p>
-        </Fade>
-      </div>
+        </div>
+      </Fade>
     </section>
   );
 };

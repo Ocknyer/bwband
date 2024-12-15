@@ -10,6 +10,7 @@ import emailjs from '@emailjs/browser';
 import { TICKETS } from '@/constant';
 import ReservationSection from '@/components/ReservationSection';
 import { useRouter } from 'next/navigation';
+import Spinner from '@/components/Common/Spinner';
 
 export type Input = {
   name: string;
@@ -35,6 +36,7 @@ const Reservation = () => {
 
   const [id, setId] = useState<string>();
   const [isAgree, setIsAgree] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [inputs, setInputs] = useState<Input>({
     name: '',
     count: '',
@@ -148,7 +150,7 @@ const Reservation = () => {
   // form 제출
   const onClickReserve = async (e: any) => {
     e.preventDefault();
-
+    setIsLoading(true);
     if (checkIsBooked(inputs)) {
       alert(
         '입력하신 휴대전화번호로 기존 예매 정보가 존재합니다.\n\n추가 예매를 원하시면 010-4138-8402(고유석)으로 문의 주시기 바랍니다.'
@@ -164,6 +166,7 @@ const Reservation = () => {
           sessionStorage.setItem('isBooked', 'true');
         })
         .then(() => {
+          setIsLoading(false);
           router.push('/complete');
           sessionStorage.setItem('inputs', JSON.stringify(inputs));
           setInputs({
@@ -178,16 +181,17 @@ const Reservation = () => {
   };
 
   return (
-    <main className='main-container flex flex-col items-center justify-center w-full min-h-dvh pt-32 px-6 pb-16'>
+    <main className='main-container flex flex-col items-center justify-center w-full min-h-dvh px-6 pt-36 sm:pt-48 pb-24 sm:pb-40 '>
       {!dataList ? (
-        <svg className='animate-spin h-10 w-10 mr-3' fill='#00b7ff' viewBox='0 0 48 48'>
-          <g id='_레이어_1-2' data-name='레이어 1'>
-            <path
-              className='cls-1'
-              d='m42.7,20.72c.19,1.07.3,2.16.3,3.28,0,10.48-8.52,19-19,19S5,34.48,5,24,13.52,5,24,5c1.12,0,2.21.12,3.28.3l1.9-4.74c-1.67-.37-3.4-.57-5.17-.57C10.75,0,0,10.75,0,24s10.75,24,24,24,24-10.75,24-24c0-1.78-.2-3.51-.57-5.17l-4.74,1.9Z'
-            />
-          </g>
-        </svg>
+        // <svg className='animate-spin h-10 w-10 mr-3' fill='#00b7ff' viewBox='0 0 48 48'>
+        //   <g id='_레이어_1-2' data-name='레이어 1'>
+        //     <path
+        //       className='cls-1'
+        //       d='m42.7,20.72c.19,1.07.3,2.16.3,3.28,0,10.48-8.52,19-19,19S5,34.48,5,24,13.52,5,24,5c1.12,0,2.21.12,3.28.3l1.9-4.74c-1.67-.37-3.4-.57-5.17-.57C10.75,0,0,10.75,0,24s10.75,24,24,24,24-10.75,24-24c0-1.78-.2-3.51-.57-5.17l-4.74,1.9Z'
+        //     />
+        //   </g>
+        // </svg>
+        <Spinner />
       ) : (
         <section className='flex flex-col items-center justify-center w-full'>
           <form ref={formRef} onSubmit={sendEmail} className='hidden'>
@@ -196,8 +200,8 @@ const Reservation = () => {
             <input name='count' value={count} onChange={handleData} required />
           </form>
           <Fade direction='up' triggerOnce className='w-full max-w-96 mx-auto'>
-            <form className='flex flex-col text-center items-center gap-4 mb-16 rounded-2xl p-8 w-full backdrop-blur-sm shadow-lg bg-black/70'>
-              <h1 className='mb-4 font-bold text-center'>잔여 {TICKETS - reserveLength!}석</h1>
+            <form className='flex flex-col text-center items-center gap-4 mb-6 rounded-2xl p-8 w-full backdrop-blur-sm shadow-lg bg-black/70'>
+              <p className='mb-4 text-2xl text-center font-capsSmall'>{TICKETS - reserveLength!} SEATS LEFT</p>
               <div className={styles.inputBox}>
                 <label htmlFor='name' className='font-bold text-sm'>
                   성함
@@ -262,10 +266,12 @@ const Reservation = () => {
                 type='submit'
                 onClick={onClickReserve}
                 className={
-                  'h-12 p-2 w-full mt-2' + ' ' + [!isFilled ? 'bg-gray-300 text-gray-500' : 'bg-primary text-white']
+                  'h-12 p-2 w-full mt-2 flex items-center justify-center' +
+                  ' ' +
+                  [!isFilled ? 'bg-gray-300 text-gray-500' : 'bg-primary text-white']
                 }
               >
-                제출하기
+                {isLoading ? <Spinner /> : '제출하기'}
               </button>
             </form>
           </Fade>

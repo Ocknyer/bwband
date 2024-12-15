@@ -39,15 +39,10 @@ export const date = {
 
 export const price = {
   title: '티켓 가격',
-  content: '10,000원',
+  content: '8,000원',
 };
 
 export const capacity = {
   title: '수용인원',
   content: '전석 스탠딩/100명',
-};
-
-export const teams = {
-  title: '출연진',
-  content: ['The rotten', 'Band JANSs'],
 };
