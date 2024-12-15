@@ -2,10 +2,10 @@ import '../globals.css';
 import TopNav from '@/components/TopNav';
 import { Metadata } from 'next';
 import Image from 'next/image';
-// import bgImage from '@/public/image/bg-image.webp';
-import bgImage from '@/public/image/bg-image.png';
+import bgImage from '@/public/image/bg-image.webp';
 import localFont from 'next/font/local';
 import BottomNav from '@/components/BottomNav';
+import { Nanum_Myeongjo } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: '흑백밴드전 | 밴드 계급 전쟁',
@@ -38,6 +38,13 @@ const capsSmall = localFont({
   variable: '--font-capsmall',
 });
 
+const nanumMyeongjo = Nanum_Myeongjo({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-nanumMyeongjo',
+});
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko'>
@@ -55,11 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src='https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=aejuu1jw3l'
         />
       </head>
-      <body className={`relative text-white ${capsSmall.variable}`}>
-        {/* <div className='fixed inset-0 w-full h-full -z-10 flex'>
-          <div className='flex-1 inset-0 bg-gray-50'></div>
-          <div className='flex-1 inset-0 bg-primary'></div>
-        </div> */}
+      <body className={`relative text-white ${capsSmall.variable} ${nanumMyeongjo.variable}`}>
         <div className='fixed inset-0 w-full h-full -z-20 scale-110'>
           <div className='absolute inset-0 bg-primary z-10 opacity-40'></div>
           <Image src={bgImage} alt='배경이미지' fill className='object-cover' />

@@ -1,5 +1,6 @@
 import { date, price, capacity } from '@/constant';
 import { Fade } from 'react-awesome-reveal';
+import MapSection from './MapSection';
 
 const styles = {
   alignLeft: 'flex flex-col gap-y-3 items-start justify-center text-center mt-16',
@@ -34,6 +35,9 @@ const BasicInfoSection = () => {
           <p className={styles.headerTextWhite}>{price.title}</p>
           <p className={styles.infoTextWhite}>{price.content}</p>
         </div>
+      </Fade>
+      <Fade direction='up' triggerOnce duration={1000}>
+        <MapSection />
       </Fade>
     </section>
   );

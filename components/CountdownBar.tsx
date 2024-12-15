@@ -1,22 +1,14 @@
 'use client';
 
 import useCountdown from '@/hooks/useCountdown';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import CompleteSection from './CompleteSection';
+import React from 'react';
 
 interface IProps {
   endTime: string;
 }
 
 const CountdownBar = ({ endTime }: IProps) => {
-  const router = useRouter();
   const { remainingTime, isLoading } = useCountdown(endTime);
-  const [isComplete, setIsComplete] = useState(false);
-
-  // const handleReservation = () => {
-  //   router.push('/reservation');
-  // };
 
   return (
     <div className='fixed top-20 left-0 w-full flex justify-center z-20 bg-primary items-center'>

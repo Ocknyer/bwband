@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+dayjs.locale('ko');
 import duration from 'dayjs/plugin/duration';
 
 dayjs.extend(duration);
@@ -14,22 +16,38 @@ export default function useCountdown(targetTime: string) {
     const calculateRemainingTime = () => {
       const currentTime = dayjs();
       const targetDate = dayjs(targetTime);
-      const duration = dayjs.duration(targetDate.diff(currentTime));
+      const nextDay = targetDate.add(1, 'day').startOf('day');
 
-      const days = String(duration.days());
+      if (currentTime.isAfter(targetDate) && currentTime.isBefore(nextDay)) {
+        setRemaingTime('D-DAY');
+        setIsLoading(false);
+        return;
+      }
+
+      if (currentTime.isAfter(nextDay)) {
+        setRemaingTime('End');
+        setIsLoading(false);
+        return;
+      }
+
+      const diffDays = targetDate.startOf('day').diff(currentTime.startOf('day'), 'day');
+
+      const duration = dayjs.duration(targetDate.diff(currentTime));
       const hours = String(duration.hours()).padStart(2, '0');
       const minutes = String(duration.minutes()).padStart(2, '0');
       const seconds = String(duration.seconds()).padStart(2, '0');
 
-      if (Number(days) > 0) {
-        setRemaingTime(`D-${days} | ${hours} : ${minutes} : ${seconds}`);
-      } else {
+      if (diffDays === 0) {
         setRemaingTime(`${hours} : ${minutes} : ${seconds}`);
+      } else {
+        setRemaingTime(`D-${diffDays} | ${hours} : ${minutes} : ${seconds}`);
       }
+
       setIsLoading(false);
     };
 
-    const intervalId = setInterval(calculateRemainingTime, 1000); //1초마다 불러오기
+    calculateRemainingTime();
+    const intervalId = setInterval(calculateRemainingTime, 1000);
     return () => clearInterval(intervalId);
   }, [targetTime]);
 

@@ -21,7 +21,7 @@ const config: Config = {
       fontFamily: {
         capsSmall: ['var(--font-capsmall)'],
         blackHanSans: ['Black Han Sans'],
-        nanumMyeongjo: ['Nanum Myeongjo'],
+        nanumMyeongjo: ['var(--font-nanumMyeongjo)'],
         hsbombaram: ['HSBombaram'],
         gongGothicMedium: ['GongGothicMedium'],
       },
@@ -40,17 +40,6 @@ const config: Config = {
       xl: '1440px',
       '2xl': '1536px',
     },
-    // keyframes: {
-    //   spin: {
-    //     '0%': {
-    //       transform: 'rotate(0deg)',
-    //     },
-    //     '100%': {
-    //       transform: 'rotate(360deg)',
-    //     },
-    //   },
-    // },
-    // animation: { spin: 'spin 1.5s linear infinite' },
   },
   plugins: [],
 };

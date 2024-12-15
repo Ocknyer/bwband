@@ -34,7 +34,6 @@
   font-style: normal;
 }
 
-@import url('https://fonts.googleapis.com/earlyaccess/nanummyeongjo.css?family=Nanum+Myeongjo');
 @import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400?family=Black+Han+Sans');
 
 @font-face {
@@ -179,10 +178,6 @@ h3 {
 
 body {
   font-family: 'Pretendard-Regular';
-}
-
-.intro-font {
-  font-family: 'Nanum Myeongjo';
 }
 
 .black-han-sans {
