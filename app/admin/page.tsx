@@ -7,13 +7,11 @@ import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from
 import firebasedb from '@/firebase/firebasedb';
 import { formatTimeStamp } from '@/utils/utils';
 import useCopyClipboard from '@/hooks/useCopyClipboard';
-import { useVh } from '@/hooks/useVh';
 import { TICKETS } from '@/constant';
 import Spinner from '@/components/Common/Spinner';
+import BookingListCard from '@/components/Admin/BookingListCard';
 
 const Admin = () => {
-  const { copyToClipboard } = useCopyClipboard();
-  const vh = useVh();
   const auth = getAuth(firebasedb);
 
   const [initialData, setInitialData] = useState<any[]>([]);
@@ -123,14 +121,14 @@ const Admin = () => {
   }
 
   return !isLogin ? (
-    <main className='main-container p-6' style={{ height: `${100 * vh}px` }}>
-      <div className='flex flex-col items-center justify-center gap-2 h-dvh max-w-96 mx-auto'>
+    <main className='main-container min-h-dvh'>
+      <div className='flex flex-col items-center justify-center gap-4 h-dvh max-w-96 mx-auto p-6'>
         <input
           type='text'
           placeholder='아이디'
           value={email}
           onInput={(e) => setEmail(e.currentTarget.value)}
-          className='h-12 p-2 border-solid border text-black text-base rounded-lg w-full'
+          className='h-12 p-2 border-solid border text-black text-base w-full'
         />
         <input
           type='password'
@@ -138,27 +136,24 @@ const Admin = () => {
           name='password'
           value={password}
           onInput={(e) => setPassword(e.currentTarget.value)}
-          className='h-12 p-2 border-solid border text-black text-base rounded-lg w-full'
+          className='h-12 p-2 border-solid border text-black text-base w-full'
         />
-        <button
-          onClick={login}
-          className='h-12 bg-primary text-white rounded-md w-full flex items-center justify-center'
-        >
+        <button onClick={login} className='h-12 bg-primary text-white w-full flex items-center justify-center'>
           {loading ? <Spinner /> : '로그인'}
         </button>
       </div>
     </main>
   ) : (
-    <main className='main-container p-4 h-dvh'>
-      <div className='flex flex-col fixed top-0 left-0 h-32 backdrop-blur-sm items-center justify-center w-full p-4 gap-2 z-10'>
-        <div className='main-container flex w-full gap-2 md:p-4'>
+    <main className='main-container h-dvh'>
+      <div className='flex flex-col fixed top-0 left-0 h-32 backdrop-blur-sm bg-primary/70 items-center justify-center w-full p-4 gap-4 z-10'>
+        <div className='main-container flex w-full gap-4 md:p-4'>
           <input
             type='text'
             placeholder='검색'
             onInput={(e) => setFilterText(e.currentTarget.value)}
-            className='h-12 p-2 border-solid border text-black text-base rounded-lg flex-1'
+            className='h-12 p-2 border-solid border text-black text-base flex-1 bg-gray-100'
           />
-          <button onClick={logout} className='h-12 bg-primary text-white w-24 rounded-md'>
+          <button onClick={logout} className='h-12 bg-gray-200 font-bold text-primary w-24'>
             로그아웃
           </button>
         </div>
@@ -171,37 +166,11 @@ const Admin = () => {
           </p>
         </div>
       </div>
-      <div className='flex flex-col gap-2 pt-32 pb-24'>
+      <ul className='flex flex-col gap-4 pt-36 pb-24 px-4'>
         {dataList.map((data, idx) => (
-          <div key={idx} className='bg-white rounded-lg p-4 relative'>
-            <p className='absolute right-2 top-2 text-gray-500'>{data.id}</p>
-            <div className='flex gap-2 items-center'>
-              <p className='text-xl font-bold text-gray-600'>{data.name}</p>
-              <p className='text-gray-500'>{data.count}매</p>
-            </div>
-            <p className='text-gray-600 text-lg font-bold'>
-              전화번호:{' '}
-              <span
-                className='underline'
-                onClick={() => copyToClipboard(data.phone_number, '전화번호가 복사되었습니다.')}
-              >
-                {data.phone_number}
-              </span>
-            </p>
-            <p className='text-gray-600'>예매 날짜: {data.createdAt}</p>
-            {!data.checked ? (
-              <button
-                onClick={() => updateCheckedState(data.id)}
-                className='absolute right-2 bottom-2 text-white bg-primary px-2 py-1 rounded-md'
-              >
-                확인
-              </button>
-            ) : (
-              <p className='absolute right-2 bottom-2 text-gray-400 bg-gray-300 px-2 py-1 rounded-md'>완료</p>
-            )}
-          </div>
+          <BookingListCard data={data} idx={idx} updateCheckedState={updateCheckedState} key={idx} />
         ))}
-      </div>
+      </ul>
     </main>
   );
 };

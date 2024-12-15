@@ -19,7 +19,6 @@ export default function Home() {
       <main className='main-container flex flex-col gap-10 items-center justify-center px-6 pb-24 overflow-x-hidden'>
         <IntroSection />
         <BasicInfoSection />
-        <MapSection />
       </main>
     )
   );

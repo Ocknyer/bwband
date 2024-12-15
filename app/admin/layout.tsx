@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src='https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=aejuu1jw3l'
         />
       </head>
-      <body className={`relative text-white bg-zinc-800`}>{children}</body>
+      <body className={`relative text-white bg-primary/90`}>{children}</body>
     </html>
   );
 }
