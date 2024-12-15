@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
@@ -6,6 +8,7 @@ dayjs.extend(duration);
 
 export default function useCountdown(targetTime: string) {
   const [remainingTime, setRemaingTime] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const calculateRemainingTime = () => {
@@ -23,6 +26,7 @@ export default function useCountdown(targetTime: string) {
       } else {
         setRemaingTime(`${hours} : ${minutes} : ${seconds}`);
       }
+      setIsLoading(false);
     };
 
     const intervalId = setInterval(calculateRemainingTime, 1000); //1초마다 불러오기
@@ -31,5 +35,6 @@ export default function useCountdown(targetTime: string) {
 
   return {
     remainingTime,
+    isLoading,
   };
 }

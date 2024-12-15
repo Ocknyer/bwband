@@ -20,6 +20,30 @@
   }
 }
 
+@font-face {
+  font-family: 'HSBombaram';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/earlyaccess/nanummyeongjo.css?family=Nanum+Myeongjo');
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400?family=Black+Han+Sans');
+
+@font-face {
+  font-family: 'GongGothicMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body,
 div,
@@ -153,15 +177,16 @@ h3 {
   font-weight: 700;
 }
 
-@font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
 body {
   font-family: 'Pretendard-Regular';
+}
+
+.intro-font {
+  font-family: 'Nanum Myeongjo';
+}
+
+.black-han-sans {
+  font-family: 'Black Han Sans';
 }
 
 .title-font {

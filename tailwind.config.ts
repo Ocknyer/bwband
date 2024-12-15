@@ -18,6 +18,13 @@ const config: Config = {
       colors: {
         primary: '#060507',
       },
+      fontFamily: {
+        capsSmall: ['var(--font-capsmall)'],
+        blackHanSans: ['Black Han Sans'],
+        nanumMyeongjo: ['Nanum Myeongjo'],
+        hsbombaram: ['HSBombaram'],
+        gongGothicMedium: ['GongGothicMedium'],
+      },
       transformOrigin: {
         'origin-center': 'center',
       },
@@ -33,21 +40,17 @@ const config: Config = {
       xl: '1440px',
       '2xl': '1536px',
     },
-    // spacing: {
-    //   '128': '32rem',
-    //   '144': '36rem',
+    // keyframes: {
+    //   spin: {
+    //     '0%': {
+    //       transform: 'rotate(0deg)',
+    //     },
+    //     '100%': {
+    //       transform: 'rotate(360deg)',
+    //     },
+    //   },
     // },
-    keyframes: {
-      spin: {
-        '0%': {
-          transform: 'rotate(0deg)',
-        },
-        '100%': {
-          transform: 'rotate(360deg)',
-        },
-      },
-    },
-    animation: { spin: 'spin 1.5s linear infinite' },
+    // animation: { spin: 'spin 1.5s linear infinite' },
   },
   plugins: [],
 };
