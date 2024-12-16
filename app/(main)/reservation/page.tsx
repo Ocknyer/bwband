@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import CompleteSection from '@/components/CompleteSection';
 import fireStore from '../../../firebase/firestore';
 import { getDocs, addDoc, collection, query, orderBy, doc, setDoc } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
@@ -147,11 +146,13 @@ const Reservation = () => {
   const onClickReserve = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
+
     if (checkIsBooked(inputs)) {
       alert(
         '입력하신 휴대전화번호로 기존 예매 정보가 존재합니다.\n\n추가 예매를 원하시면 010-4138-8402(고유석)으로 문의 주시기 바랍니다.'
       );
       setInputs({ ...inputs, phone_number: '' });
+      setIsLoading(false);
       return;
     }
 
@@ -162,7 +163,6 @@ const Reservation = () => {
           sessionStorage.setItem('isBooked', 'true');
         })
         .then(() => {
-          setIsLoading(false);
           router.push('/complete');
           sessionStorage.setItem('inputs', JSON.stringify(inputs));
           setInputs({
@@ -170,6 +170,12 @@ const Reservation = () => {
             count: '',
             phone_number: '',
           });
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     } else {
       alert('필수 정보를 입력해 주세요');
