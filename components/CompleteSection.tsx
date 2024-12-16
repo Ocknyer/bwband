@@ -1,5 +1,6 @@
 'use client';
 
+import { TICKET_PRICE } from '@/constant';
 import useCopyClipboard from '@/hooks/useCopyClipboard';
 import React, { useEffect, useState } from 'react';
 import { Fade } from 'react-awesome-reveal';
@@ -24,7 +25,7 @@ const CompleteSection = () => {
     return null; // 또는 로딩 상태를 보여줄 수 있습니다
   }
 
-  const totalPrice = (+inputs.count * 8000).toLocaleString();
+  const totalPrice = (+inputs.count * TICKET_PRICE).toLocaleString();
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center min-h-dvh'>
