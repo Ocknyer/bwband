@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     mounted && (
-      <main className='main-container flex flex-col gap-10 items-center justify-center px-6 pb-24 overflow-x-hidden'>
+      <main className='main-container flex flex-col gap-10 items-center justify-center pb-24 overflow-x-hidden'>
         <IntroSection />
         <BasicInfoSection />
       </main>

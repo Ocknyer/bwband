@@ -4,7 +4,7 @@ import NaverMap from './NaverMap';
 
 const MapSection = () => {
   return (
-    <section className='flex flex-col items-center justify-center text-center w-full gap-4 mt-16'>
+    <section className='flex flex-col items-center justify-center text-center w-full gap-4 mt-16 px-6'>
       <p className='text-lg font-bold text-white font-gongGothicMedium'>장소</p>
       <p className='text-sm text-gray-50'>홍대 스윙홀</p>
       <NaverMap />
