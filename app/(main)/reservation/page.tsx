@@ -157,28 +157,32 @@ const Reservation = () => {
     }
 
     if (inputs.count && inputs.name && inputs.phone_number) {
-      await setDoc(doc(fireStore, 'bwbandbooker', id as string), { ...inputs, createdAt: time, checked: false })
-        .then(() => {
-          sendEmail();
-          sessionStorage.setItem('isBooked', 'true');
-        })
-        .then(() => {
-          router.push('/complete');
-          sessionStorage.setItem('inputs', JSON.stringify(inputs));
-          setInputs({
-            name: '',
-            count: '',
-            phone_number: '',
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          setIsLoading(false);
+      try {
+        // 예매 정보 저장
+        await setDoc(doc(fireStore, 'bwbandbooker', id as string), {
+          ...inputs,
+          createdAt: time,
+          checked: false,
         });
+
+        // 이메일 전송
+        await sendEmail();
+
+        // 세션스토리지에 예매 정보 저장
+        sessionStorage.setItem('isBooked', 'true');
+        sessionStorage.setItem('inputs', JSON.stringify(inputs));
+
+        // 페이지 이동 (폼 초기화는 페이지 이동 후에 자동으로 이루어짐)
+        router.push('/complete');
+      } catch (error) {
+        console.log(error);
+        alert('예매 중 오류가 발생했습니다. 다시 시도해주세요.');
+      } finally {
+        setIsLoading(false);
+      }
     } else {
       alert('필수 정보를 입력해 주세요');
+      setIsLoading(false);
     }
   };
 
@@ -193,7 +197,7 @@ const Reservation = () => {
             <input name='phone_number' value={phone_number} onChange={handleData} required />
             <input name='count' value={count} onChange={handleData} required />
           </form>
-          <Fade direction='up' triggerOnce className='w-full max-w-96 sm:max-w-full mx-auto'>
+          <Fade direction='up' triggerOnce className='w-full max-w-96 mx-auto'>
             <ReservForm
               reserveLength={reserveLength as number}
               name={name}
@@ -205,8 +209,6 @@ const Reservation = () => {
               isFilled={isFilled}
               isLoading={isLoading}
             />
-          </Fade>
-          <Fade direction='up' triggerOnce className='w-full'>
             <ReservationSection />
           </Fade>
         </section>
