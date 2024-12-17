@@ -51,7 +51,7 @@ const SetList = () => {
   return (
     <main className='main-container flex flex-col items-center px-10 pt-40 pb-24 gap-10'>
       {teamsData.map((team, index) => (
-        <Fade key={index} direction='up' triggerOnce className='w-full'>
+        <Fade key={index} direction='up' triggerOnce className='w-full max-w-96'>
           <div className={`flex flex-col gap-10 backdrop-blur-md h-full p-6 ${team.bgColor}`}>
             <section className={`text-center ${team.textColor}`}>
               <div className='flex items-center justify-center gap-3 mb-6'>

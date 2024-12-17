@@ -30,7 +30,7 @@ const CompleteSection = () => {
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center min-h-dvh'>
       <Fade direction='up'>
-        <div className='backdrop-blur-sm shadow-lg bg-black/70 p-6 rounded-2xl'>
+        <div className='backdrop-blur-sm shadow-lg bg-black/70 p-6'>
           <p className='text-2xl font-bold font-capsSmall'>Booking Completed</p>
           {/* <h1 className='text-lg font-bold'>작성이 완료되었습니다.</h1> */}
           <p className='leading-7 mt-6'>
@@ -49,7 +49,7 @@ const CompleteSection = () => {
             <br />
             <span className='inline underline font-bold'>똑같이</span> 입력해주시기 바랍니다.
           </p>
-          <p className='leading-7 mt-6 font-bold bg-white/100 px-4 py-1 rounded-lg text-primary'>
+          <p className='leading-7 mt-6 font-bold bg-white/100 px-4 py-1 rounded-md text-primary'>
             국민{' '}
             <button
               onClick={() => copyToClipboard('국민 94160201320107', '계좌번호가 복사되었습니다.')}

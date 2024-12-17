@@ -4,7 +4,7 @@ import DoubleArrowDown from './Common/DoubleArrowDown';
 
 const IntroSection = () => {
   return (
-    <section className='flex flex-col min-h-dvh justify-between pt-36 sm:pt-48 pb-16 sm:pb-36 w-full'>
+    <section className='flex flex-col min-h-dvh justify-between pt-36 sm:pt-48 pb-16 sm:pb-24 w-full'>
       <Fade direction='up' triggerOnce duration={1000}>
         <div className='flex flex-col gap-4 items-center text-center font-nanumMyeongjo drop-shadow-md'>
           <p className='text-base font-bold text-white leading-8'>흑과 백, 글과 종이이자 음표와 악보.</p>
@@ -15,10 +15,10 @@ const IntroSection = () => {
             대비되는 두 색이 조화를 만드는 그 현장으로 <br className='block sm:hidden' /> 여러분을 초대합니다.
           </p>
         </div>
-        <div className='flex flex-col items-center text-center w-full gap-2'>
-          <p className='font-bold text-sm underline underline-offset-8'>LINE UP</p>
+        <div className='flex flex-col items-center text-center w-full'>
+          <p className='font-bold text-sm underline underline-offset-8 text-white/95'>LINE UP</p>
           {/* <div className='w-[55px] h-[1px] bg-white mt-1 mb-2'></div> */}
-          <div className='flex text-center w-full'>
+          <div className='flex text-center w-full mt-4 sm:mt-8'>
             <p className='flex-1 font-capsSmall text-3xl sm:text-5xl text-primary'>
               Band
               <br />
