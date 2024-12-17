@@ -64,7 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`relative text-white ${capsSmall.variable} ${nanumMyeongjo.variable}`}>
         <div className='fixed inset-0 w-full h-full -z-20 scale-110'>
-          <div className='absolute inset-0 bg-primary z-10 opacity-40'></div>
+          <div className='absolute inset-0 bg-primary z-10 opacity-30'></div>
           <Image src={bgImage} alt='배경이미지' fill className='object-cover' />
         </div>
         <TopNav />

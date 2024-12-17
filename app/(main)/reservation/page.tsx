@@ -183,7 +183,7 @@ const Reservation = () => {
   };
 
   return (
-    <main className='main-container flex flex-col items-center justify-center w-full min-h-dvh px-6 pt-36 sm:pt-48 pb-24 sm:pb-40 '>
+    <main className='main-container flex flex-col items-center justify-center w-full min-h-dvh px-6 pt-36 sm:pt-48 pb-20 sm:pb-36 '>
       {!dataList ? (
         <Spinner />
       ) : (
@@ -193,7 +193,7 @@ const Reservation = () => {
             <input name='phone_number' value={phone_number} onChange={handleData} required />
             <input name='count' value={count} onChange={handleData} required />
           </form>
-          <Fade direction='up' triggerOnce className='w-full max-w-96 mx-auto'>
+          <Fade direction='up' triggerOnce className='w-full max-w-96 sm:max-w-full mx-auto'>
             <ReservForm
               reserveLength={reserveLength as number}
               name={name}
@@ -206,7 +206,7 @@ const Reservation = () => {
               isLoading={isLoading}
             />
           </Fade>
-          <Fade direction='up' triggerOnce delay={300} className='w-full'>
+          <Fade direction='up' triggerOnce className='w-full'>
             <ReservationSection />
           </Fade>
         </section>
