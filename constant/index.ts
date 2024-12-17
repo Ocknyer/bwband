@@ -1,5 +1,5 @@
 export const TICKETS = 100;
-export const TICKET_PRICE = 8000;
+export const TICKET_PRICE = 7000;
 
 export const noticeData = [
   '공연은 전석 스탠딩으로 진행됩니다. (현장 선착순 입장)',

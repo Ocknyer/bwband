@@ -18,7 +18,8 @@ interface ReservFormProps {
 
 const styles = {
   inputBox: 'flex flex-col w-full text-left',
-  input: 'p-2 border-solid border mt-2 text-black text-base',
+  input: 'p-2 border-solid border mt-2 text-black text-base h-10',
+  button: 'h-10 p-2 w-full mt-2 flex items-center justify-center',
 };
 
 const ReservForm = ({
@@ -33,8 +34,8 @@ const ReservForm = ({
   isLoading,
 }: ReservFormProps) => {
   return (
-    <form className='flex flex-col text-center items-center gap-4 mb-6 p-8 w-full backdrop-blur-sm shadow-lg bg-black/70'>
-      <p className='mb-4 text-2xl text-center font-capsSmall'>{TICKETS - reserveLength!} SEATS LEFT</p>
+    <form className='flex flex-col text-center items-center gap-4 mb-6 p-6 w-full backdrop-blur-sm shadow-lg bg-black/70'>
+      <p className='text-2xl text-center font-capsSmall'>{TICKETS - reserveLength!} SEATS LEFT</p>
       <div className={styles.inputBox}>
         <label htmlFor='name' className='font-bold text-sm'>
           성함
@@ -93,11 +94,7 @@ const ReservForm = ({
         disabled={isFilled ? false : true}
         type='submit'
         onClick={onClick}
-        className={
-          'h-12 p-2 w-full mt-2 flex items-center justify-center' +
-          ' ' +
-          [!isFilled ? 'bg-gray-300 text-gray-500' : 'bg-primary text-white']
-        }
+        className={styles.button + ' ' + [!isFilled ? 'bg-gray-300 text-gray-500' : 'bg-primary text-white']}
       >
         {isLoading ? <Spinner /> : '제출하기'}
       </button>
