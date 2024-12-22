@@ -7,6 +7,7 @@ const teamsData = [
     teamName: 'Band JANSs',
     setlists: [
       { singer: '하현상', songName: '불꽃놀이' },
+      { singer: 'The Volunteers', songName: 'Violet' },
       { singer: '한로로', songName: '비틀비틀 짝짜꿍' },
       { singer: '자우림', songName: '미안해 널 미워해' },
       { singer: 'Metallica', songName: 'Enter sandman' },
