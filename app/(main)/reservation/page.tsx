@@ -11,6 +11,7 @@ import ReservationSection from '@/components/ReservationSection';
 import { useRouter } from 'next/navigation';
 import Spinner from '@/components/Common/Spinner';
 import ReservForm from '@/components/ReservForm';
+import dayjs from 'dayjs';
 
 export type Input = {
   name: string;
@@ -186,31 +187,41 @@ const Reservation = () => {
     }
   };
 
+  const isEnd = dayjs().isAfter(dayjs('2025-01-04T20:00:00'));
+
   return (
     <main className='main-container flex flex-col items-center justify-center w-full min-h-dvh px-6 pt-36 sm:pt-48 pb-20 sm:pb-36 '>
       {!dataList ? (
         <Spinner />
       ) : (
         <section className='flex flex-col items-center justify-center w-full'>
-          <form ref={formRef} onSubmit={sendEmail} className='hidden'>
-            <input type='text' name='name' value={name} onChange={handleData} required />
-            <input name='phone_number' value={phone_number} onChange={handleData} required />
-            <input name='count' value={count} onChange={handleData} required />
-          </form>
-          <Fade direction='up' triggerOnce className='w-full max-w-96 mx-auto'>
-            <ReservForm
-              reserveLength={reserveLength as number}
-              name={name}
-              phone_number={phone_number}
-              count={count}
-              handleData={handleData}
-              onClick={onClickReserve}
-              setIsAgree={setIsAgree}
-              isFilled={isFilled}
-              isLoading={isLoading}
-            />
-            <ReservationSection />
-          </Fade>
+          {isEnd ? (
+            <div className='flex flex-col items-center justify-center w-full'>
+              <p className='text-2xl font-bold text-center'>공연이 종료되었습니다.</p>
+            </div>
+          ) : (
+            <>
+              <form ref={formRef} onSubmit={sendEmail} className='hidden'>
+                <input type='text' name='name' value={name} onChange={handleData} required />
+                <input name='phone_number' value={phone_number} onChange={handleData} required />
+                <input name='count' value={count} onChange={handleData} required />
+              </form>
+              <Fade direction='up' triggerOnce className='w-full max-w-96 mx-auto'>
+                <ReservForm
+                  reserveLength={reserveLength as number}
+                  name={name}
+                  phone_number={phone_number}
+                  count={count}
+                  handleData={handleData}
+                  onClick={onClickReserve}
+                  setIsAgree={setIsAgree}
+                  isFilled={isFilled}
+                  isLoading={isLoading}
+                />
+                <ReservationSection />
+              </Fade>
+            </>
+          )}
         </section>
       )}
     </main>
